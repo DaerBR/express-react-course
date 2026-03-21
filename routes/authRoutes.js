@@ -18,7 +18,21 @@ module.exports = (app) => {
       failureRedirect: '/',
     }),
     (req, res) => {
-      res.redirect('/profile');
+      res.redirect('/');
     },
   );
+
+  app.get('/api/current_user', (req, res) => {
+    res.send(req.user);
+  });
+
+  app.get('/api/logout', (req, res) => {
+    req.logout((err) => {
+      if (err) {
+        console.error('Error during logout:', err);
+        return res.status(500).send({ error: 'Logout failed' });
+      }
+      res.redirect('/');
+    });
+  });
 };
