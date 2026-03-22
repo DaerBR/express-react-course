@@ -27,12 +27,7 @@ module.exports = (app) => {
   });
 
   app.get('/api/logout', (req, res) => {
-    req.logout((err) => {
-      if (err) {
-        console.error('Error during logout:', err);
-        return res.status(500).send({ error: 'Logout failed' });
-      }
-      res.redirect('/');
-    });
+    req.logout();
+    res.redirect('/');
   });
 };
